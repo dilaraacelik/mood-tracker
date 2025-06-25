@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f3ecec;
+  --foreground: #eee2e2; 
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #e7e2e2;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-poppins), sans-serif;
+}
+
+@layer components {
+  .nav-button {
+    @apply text-black hover:text-blue-600 transition-colors duration-200 font-medium;
+  }
+}
