@@ -21,7 +21,7 @@
 
 .react-calendar button:enabled:hover,
 .react-calendar button:enabled:focus {
-    background-color: #e6f7ff; /* Mouse üzerine gelince açık mavi arka plan */
+    background-color: #c7d2fe; /* Mouse üzerine gelince indigo-200 arka plan */
     border-radius: 6px; /* Hover durumunda köşe yuvarlaklığı */
 }
 
@@ -49,7 +49,7 @@
 
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
-    background-color: #e6f7ff; /* Navigasyon butonları hover rengi */
+    background-color: #c7d2fe; /* Navigasyon butonları hover rengi */
 }
 
 .react-calendar__month-view__weekdays {
@@ -91,7 +91,7 @@
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-    background-color: #e6f7ff; /* Kutucuklar üzerine gelince açık mavi */
+    background-color: #c7d2fe; /* Kutucuklar üzerine gelince indigo-200 */
 }
 
 .react-calendar__tile--now {
@@ -107,7 +107,7 @@
 
 .react-calendar__tile--hasActive:enabled:hover,
 .react-calendar__tile--hasActive:enabled:focus {
-    background: #a9d4ff; /* Aktif kutucuklar hover durumu - açık mavi */
+    background: #c7d2fe; /* Aktif kutucuklar hover durumu - indigo-200 */
 }
 
 .react-calendar__tile--active {
@@ -121,7 +121,7 @@
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-    background: #1087ff; /* Seçili tarih hover durumu - daha açık mavi */
+    background: #c7d2fe; /* Seçili tarih hover durumu - daha indigo-200 */
 }
 
 /* Year view için özel renkler */
