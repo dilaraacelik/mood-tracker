@@ -38,6 +38,6 @@ body {
 
 @layer components {
   .nav-button {
-    @apply text-black hover:text-blue-600 transition-colors duration-200 font-medium;
+    @apply text-black hover:text-indigo-600 transition-colors duration-200 font-medium;
   }
 }
