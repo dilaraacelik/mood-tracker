@@ -7,43 +7,51 @@ function Moods() {
     <div className='items-center flex flex-col'>
         <div className='flex flex-row justify-center'>
             <div className='m-2'>
-                <button className='w-10 h-10 hover:w-12 transition-all duration-200'>
-                  <img src="/icons/happy.png" alt="Happy Icon"/>
+                <button className='w-10 h-10 hover:w-12 transition-all duration-200 flex flex-col items-center'>
+                  <img src="/icons/happy.png" alt="Happy Icon" />
+                  <span className='text-black text-xs'>Happy</span>
                 </button>
             </div>
             <div className='m-2'>
-                <button className='w-10 h-10 hover:w-12 transition-all duration-200'>
-                  <img src="/icons/sad.png" alt="Sad Icon"/>
+                <button className='w-10 h-10 hover:w-12 transition-all duration-200 flex flex-col items-center'>
+                  <img src="/icons/sad.png" alt="Sad Icon" />
+                  <span className='text-black text-xs'>Sad</span>
                 </button>
             </div>
             <div className='m-2'>
-                <button className='w-10 h-10 hover:w-12 transition-all duration-200'>
-                  <img src="/icons/angry.png" alt="Angry Icon"/>
+                <button className='w-10 h-10 hover:w-12 transition-all duration-200 flex flex-col items-center'>
+                  <img src="/icons/angry.png" alt="Angry Icon" />
+                  <span className='text-black text-xs'>Angry</span>
                 </button>
             </div>
             <div className='m-2'>
-                <button className='w-10 h-10 hover:w-12 transition-all duration-200'>
-                  <img src="/icons/neutral.png" alt="Neutral Icon"/>
+                <button className='w-10 h-10 hover:w-12 transition-all duration-200 flex flex-col items-center'>
+                  <img src="/icons/neutral.png" alt="Neutral Icon" />
+                  <span className='text-black text-xs'>Neutral</span>
                 </button>
             </div>
             <div className='m-2'>
-                <button className='w-10 h-10 hover:w-12 transition-all duration-200'>
-                  <img src="/icons/calm.png" alt="Calm Icon"/>
+                <button className='w-10 h-10 hover:w-12 transition-all duration-200 flex flex-col items-center'>
+                  <img src="/icons/calm.png" alt="Calm Icon" />
+                  <span className='text-black text-xs'>Calm</span>
                 </button>
             </div>
             <div className='m-2'>
-                <button className='w-10 h-10 hover:w-12 transition-all duration-200'>
-                  <img src="/icons/lover.png" alt="Lover Icon"/>
+                <button className='w-10 h-10 hover:w-12 transition-all duration-200 flex flex-col items-center'>
+                  <img src="/icons/lover.png" alt="Lover Icon" />
+                  <span className='text-black text-xs'>Lover</span>
                 </button>
             </div>
             <div className='m-2'>
-                <button className='w-10 h-10 hover:w-12 transition-all duration-200'>
-                  <img src="/icons/anxious.png" alt="Anxious Icon"/>
+                <button className='w-10 h-10 hover:w-12 transition-all duration-200 flex flex-col items-center'>
+                  <img src="/icons/anxious.png" alt="Anxious Icon" />
+                  <span className='text-black text-xs'>Anxious</span>
                 </button>
             </div>
             <div className='m-2'>
-                <button className='w-10 h-10 hover:w-12 transition-all duration-200'>
-                  <img src="/icons/tired.png" alt="Tired Icon"/>
+                <button className='w-10 h-10 hover:w-12 transition-all duration-200 flex flex-col items-center'>
+                  <img src="/icons/tired.png" alt="Tired Icon" />
+                  <span className='text-black text-xs'>Tired</span>
                 </button>
             </div>
         </div>
