@@ -1,6 +1,6 @@
-import MainPage from "./components/MainPage";
-import Sidebar from "./components/Sidebar";
-import Title from "./components/Navbar";
+import MainPage from "../../components/MainPage";
+import Sidebar from "../../components/Sidebar";
+import Title from "../../components/Navbar";
 
 export default function Home() {
   return (
