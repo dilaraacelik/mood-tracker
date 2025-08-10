@@ -1,6 +1,7 @@
 import React from 'react'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Title from '@/app/components/Title';
+import { signup } from '@/app/actions/auth';
 
 function Signup() {
   return (
@@ -26,11 +27,13 @@ function Signup() {
             <form className="space-y-6">
                 {/* Email Input */}
                 <div >
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor='email'>
                     Email Address
                 </label>
                 <div className="relative">
                     <input
+                    id='email'
+                    name='email'
                     type="email"
                     className="text-black w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors placeholder:text-gray-400"
                     placeholder="example@email.com"
@@ -43,11 +46,14 @@ function Signup() {
 
                 {/* Password Input */}
                 <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor='password'>
                     Password
                 </label>
                 <div className="relative">
                     <input
+                    required
+                    id='password'
+                    name='password'
                     type="password"
                     className="text-black w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors placeholder:text-gray-400"
                     placeholder="••••••••"
@@ -60,11 +66,14 @@ function Signup() {
 
                 {/* Password Input */}
                 <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor='confirm-password'>
                     Confirm Password
                 </label>
                 <div className="relative">
                     <input
+                    required
+                    id='confirm-password'
+                    name='confirm-password'
                     type="password"
                     className="text-black w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors placeholder:text-gray-400"
                     placeholder="••••••••"
@@ -79,6 +88,7 @@ function Signup() {
                 <button
                 type="submit"
                 className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
+                formAction={signup}
                 >
                 Sign Up 🚀
                 </button>

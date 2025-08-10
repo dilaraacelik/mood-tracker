@@ -1,7 +1,24 @@
+"use client"
+
 import React from 'react'
 import Title from './Title'
+import LogoutIcon from '@mui/icons-material/Logout';
+import { logout } from '@/app/actions/auth'
+import { useRouter } from 'next/navigation';
 
 function Navbar() {
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    const response = await logout();
+
+    if(response.error){
+      console.error(response.error);
+      return;
+    }
+    router.push('/login');
+  }
+
   return (
     <div className='bg-white py-4 px-6 flex justify-between items-center shadow-sm border-b border-gray-200'> 
       <Title/>
@@ -10,6 +27,7 @@ function Navbar() {
         <button className='nav-button'>Statistics</button>
         <button className='nav-button'>Settings</button>
         <button className='nav-button'>Profile</button>
+        <button className='nav-button' onClick={handleLogout}><LogoutIcon fontSize="small" /></button>
       </div>
     </div>
   )
