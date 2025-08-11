@@ -24,21 +24,22 @@ function Signup() {
                 </p>
             </div>
 
-            <form className="space-y-6">
+            <form className="space-y-4">
                 {/* Email Input */}
-                <div >
+                <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor='email'>
                     Email Address
                 </label>
                 <div className="relative">
                     <input
+                    required
                     id='email'
                     name='email'
                     type="email"
-                    className="text-black w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors placeholder:text-gray-400"
+                    className="text-black w-full px-3 py-2 pl-8 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors placeholder:text-gray-400"
                     placeholder="example@email.com"
                     />
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
+                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center">
                     <span className="text-gray-400">📧</span>
                     </div>
                 </div>
@@ -55,16 +56,16 @@ function Signup() {
                     id='password'
                     name='password'
                     type="password"
-                    className="text-black w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors placeholder:text-gray-400"
+                    className="text-black w-full px-3 py-2 pl-8 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors placeholder:text-gray-400"
                     placeholder="••••••••"
                     />
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
+                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center">
                     <span className="text-gray-400">🔒</span>
                     </div>
                 </div>
                 </div>
 
-                {/* Password Input */}
+                {/* Confirm Password Input */}
                 <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor='confirm-password'>
                     Confirm Password
@@ -75,10 +76,10 @@ function Signup() {
                     id='confirm-password'
                     name='confirm-password'
                     type="password"
-                    className="text-black w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors placeholder:text-gray-400"
+                    className="text-black w-full px-3 py-2 pl-8 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors placeholder:text-gray-400"
                     placeholder="••••••••"
                     />
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
+                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center">
                     <span className="text-gray-400">🔒</span>
                     </div>
                 </div>
@@ -87,14 +88,14 @@ function Signup() {
                 {/* SignUp Button */}
                 <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
+                className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
                 formAction={signup}
                 >
                 Sign Up 🚀
                 </button>
 
                 {/* Divider */}
-                <div className="relative my-6">
+                <div className="relative my-4">
                 <div className="absolute inset-0 flex items-center">
                     <div className="w-full border-t border-gray-300"></div>
                 </div>
@@ -110,7 +111,14 @@ function Signup() {
                     </button>
                 </div>
             </form>  
-
+            <div className="mt-4 text-center">
+                    <p className="text-gray-600 text-xs">
+                    Do you already have an account?{' '}
+                    <a href="/login" className="text-indigo-600 hover:text-indigo-500 font-semibold">
+                        Sign in now
+                    </a>
+                    </p>
+            </div>
             </div>
         </div>
     </div>

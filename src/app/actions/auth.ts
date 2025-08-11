@@ -27,26 +27,25 @@ export async function login(formData: FormData) {
 }
 
 export async function signup(formData: FormData) {
-    const supabase = await createClient()
+  const supabase = await createClient();
 
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-    const confirmPassword = formData.get('confirm-password') as string
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
+  const confirmPassword = formData.get('confirm-password') as string;
 
-    if(password !== confirmPassword){
-        console.log("Şifreler Aynı Değil")
-        return
-    }
+  if (password !== confirmPassword) {
+    throw new Error("Şifreler aynı değil");
+  }
 
-    const {error} = await supabase.auth.signUp({email, password})
-    
-    if(error){
-        console.log("Engel")
-        return
-    }
 
+  const { error} = await supabase.auth.signUp({ email, password });
+
+  if (error) {
+    throw new Error(`Kayıt başarısız: ${error.message}`);
+  }
+  
     revalidatePath('', 'layout')
-    redirect('/dashboard')
+    redirect('/login')
 
 }
 

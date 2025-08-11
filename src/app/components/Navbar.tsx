@@ -25,7 +25,6 @@ function Navbar() {
       <div className='flex gap-8'>
         <button className='nav-button'>Home</button>
         <button className='nav-button'>Statistics</button>
-        <button className='nav-button'>Settings</button>
         <button className='nav-button'>Profile</button>
         <button className='nav-button' onClick={handleLogout}><LogoutIcon fontSize="small" /></button>
       </div>

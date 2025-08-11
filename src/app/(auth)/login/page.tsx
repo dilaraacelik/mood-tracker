@@ -49,7 +49,7 @@ export default function Login() {
                 </div>
 
                 {/* Form */}
-                <form className="space-y-6" onSubmit={handleSubmit}>
+                <form className="space-y-4" onSubmit={handleSubmit}>
                     {/* Email Input */}
                     <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor='email'>
@@ -129,8 +129,8 @@ export default function Login() {
                 </form>
 
                 {/* Sign Up Link */}
-                <div className="mt-8 text-center">
-                    <p className="text-gray-600 text-sm">
+                <div className="mt-4 text-center">
+                    <p className="text-gray-600 text-xs">
                     Don't have an account?{' '}
                     <a href="/signup" className="text-indigo-600 hover:text-indigo-500 font-semibold">
                         Sign up now
