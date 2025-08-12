@@ -21,7 +21,6 @@ export async function login(formData: FormData) {
     }
 
     revalidatePath('', 'layout')
-    // redirect('/dashboard') // Bu satırı kaldır
     
     return {access_token: session.session?.access_token}
 }
