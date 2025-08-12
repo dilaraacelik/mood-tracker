@@ -3,7 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import Title from '@/app/components/Title';
 import { signup } from '@/app/actions/auth';
 
-function Signup() {
+function RegisterPage() {
   return (
     <div className="h-screen relative overflow-hidden">
       {/* SAYFANIN SOL ÜST KÖŞESİNE HİZALI TITLE */}
@@ -125,4 +125,4 @@ function Signup() {
   )
 }
 
-export default Signup
+export default RegisterPage

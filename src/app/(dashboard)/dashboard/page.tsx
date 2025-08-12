@@ -1,11 +1,11 @@
 import MainPage from "../../components/MainPage";
 import Sidebar from "../../components/Sidebar";
-import Title from "../../components/Navbar";
+import Navbar from "../../components/Navbar";
 
 export default function Home() {
   return (
     <div className="h-screen flex flex-col overflow-hidden">
-      <Title/> 
+      <Navbar/> 
       <div className="flex flex-1 h-full">
         <div className="w-1/4 border-r border-gray-300 bg-white">
             <Sidebar/>
