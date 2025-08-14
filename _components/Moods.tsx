@@ -1,6 +1,6 @@
 "use client"
 
-import { saveMood } from '@/app/actions/mood';
+import { saveOrUpdateMood } from '@/app/actions/mood';
 import React, { useEffect, useState } from 'react'
 
 import { toast } from 'react-toastify';
@@ -61,17 +61,19 @@ function Moods() {
 
   }
 
-  const handleSave = async () => {
+const handleSave = async () => {
+    localStorage.setItem('moodDesc', moodDesc ?? "");
 
-    localStorage.setItem('moodDesc', moodDesc ?? "")
+    const response = await saveOrUpdateMood(clickedMood, moodDesc);
 
-    const response = await saveMood(clickedMood, moodDesc);
     if (response?.status === 'success') {
-      toast.success("Kayıt başarılı!");
+        toast.success("Kayıt/Güncelleme başarılı!");
+        const currentDate = new Date().toISOString().split('T')[0];
+        localStorage.setItem('moodSavedDate', currentDate);
     } else {
-      toast.error(response?.message || "Kayıt başarısız!");
+        toast.error(response?.message || "İşlem başarısız!");
     }
-  }
+};
 
   return (
     <div className='items-center flex flex-col'>
