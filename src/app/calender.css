@@ -1,15 +1,20 @@
-/* React Calendar Custom Styles*/
+/* React Calendar Custom Styles - Cute & Modern */
 
 .react-calendar {
-    background: white; /* Takvimin arka plan rengi - beyaz */
-    border: 1px solid #ddd; /* Takvimin etrafındaki ince gri çerçeve */
-    border-radius: 8px; /* Köşeleri yuvarlak yapma - 8px radius */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti - aşağı doğru */
-    font-family: var(--font-poppins), 'Poppins', sans-serif; /* Uygulamayla uyumlu Poppins fontu */
-    line-height: 1.125em; /* Satır arası boşluk */
-    width: 100%; /* Tam genişlik */
-    max-width: 350px; /* Maksimum genişlik sınırı */
-    margin: 0 auto; /* Ortaya hizalama */
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%); /* Subtle gradient background */
+    border: none; /* Remove border */
+    border-radius: 20px; /* Much more rounded corners */
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.08), 
+        0 6px 12px rgba(0, 0, 0, 0.04),
+        0 0 0 1px rgba(255, 255, 255, 0.8); /* Multi-layer shadows + border */
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
+    line-height: 1.125em;
+    width: 100%;
+    max-width: 320px; /* Slightly smaller for cuter look */
+    margin: 0 auto;
+    overflow: hidden; /* Clean edges */
+    backdrop-filter: blur(10px); /* Glass effect */
 }
 
 .react-calendar button {
@@ -21,8 +26,10 @@
 
 .react-calendar button:enabled:hover,
 .react-calendar button:enabled:focus {
-    background-color: #c7d2fe; /* Mouse üzerine gelince indigo-200 arka plan */
-    border-radius: 6px; /* Hover durumunda köşe yuvarlaklığı */
+    background: linear-gradient(135deg, #c7d2fe 0%, #ddd6fe 100%); /* Gradient hover */
+    border-radius: 12px; /* More rounded hover */
+    transform: scale(1.05); /* Slight scale effect */
+    transition: all 0.2s ease-out; /* Smooth transition */
 }
 
 .react-calendar button:disabled {
@@ -31,33 +38,41 @@
 }
 
 .react-calendar__navigation {
-    text-align: center; /* Navigasyon yazılarını ortala */
-    background: #f8f9fa; /* Navigasyon barının arka plan rengi */
-    height: 44px; /* Navigasyon barının yüksekliği */
-    margin-bottom: 1em; /* Alt boşluk */
-    padding: 10px; /* İç boşluk */
-    border-radius: 8px 8px 0 0; /* Sadece üst köşeleri yuvarlak yap */
+    text-align: center;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); /* Purple gradient back */
+    height: 50px;
+    margin-bottom: 0.8em;
+    padding: 12px;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15); /* Lighter purple shadow */
 }
 
 .react-calendar__navigation button {
-    color: #333; /* Navigasyon buton yazı rengi - koyu gri */
-    min-width: 44px; /* Minimum buton genişliği */
-    background: none; /* Arka plan yok */
-    font-size: 16px; /* Yazı boyutu */
-    font-weight: bold; /* Kalın yazı */
+    color: white; /* White text back */
+    min-width: 44px;
+    background: rgba(255, 255, 255, 0.2); /* More subtle background */
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    transition: all 0.2s ease-out;
 }
 
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
-    background-color: #c7d2fe; /* Navigasyon butonları hover rengi */
+    background: rgba(255, 255, 255, 0.3); /* Subtle hover */
+    transform: scale(1.02); /* Less scale */
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2); /* Subtle white glow */
 }
 
 .react-calendar__month-view__weekdays {
-    text-align: center; /* Hafta günlerini ortala */
-    text-transform: uppercase; /* Hafta günlerini büyük harfe çevir */
-    font-weight: bold; /* Hafta günleri kalın yazı */
-    font-size: 0.75em; /* Hafta günleri küçük yazı boyutu */
-    color: #666; /* Hafta günleri gri renk */
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.7em;
+    color: #8b5cf6; /* Purple back but softer */
+    letter-spacing: 0.5px;
+    padding: 8px 0;
 }
 
 .react-calendar__month-view__days__day {
@@ -65,7 +80,8 @@
 }
 
 .react-calendar__month-view__days__day--weekend {
-    color: #d10000; /* Hafta sonu günleri kırmızı renk */
+    color: #ec4899; /* Weekend days in cute pink */
+    font-weight: 600; /* Slightly bolder */
 }
 
 .react-calendar__month-view__days__day--neighboringMonth {
@@ -79,10 +95,15 @@
 }
 
 .react-calendar__tile {
-    max-width: 100%; /* Kutucuklar maksimum genişlik */
-    text-align: center; /* Kutucuk içindeki yazıları ortala */
-    padding: 0.75em 0.5em; /* Kutucuk iç boşlukları */
-    background: none; /* Varsayılan arka plan yok */
+    max-width: 100%;
+    text-align: center;
+    padding: 0.6em 0.4em; /* Slightly smaller padding */
+    background: none;
+    border-radius: 8px; /* Rounded tiles */
+    margin: 1px; /* Small margin between tiles */
+    font-weight: 500; /* Medium font weight */
+    transition: all 0.2s ease-out; /* Smooth transitions */
+    position: relative; /* For pseudo-elements */
 }
 
 .react-calendar__tile:disabled {
@@ -91,14 +112,21 @@
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-    background-color: #c7d2fe; /* Kutucuklar üzerine gelince indigo-200 */
+    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); /* Light purple gradient back */
+    transform: scale(1.03); /* Even less scale */
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15); /* Subtle purple shadow */
 }
 
 .react-calendar__tile--now {
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Mevcut ayın hafif kenarlığı */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Mevcut ayın gölgesi */
-  border-radius: 6px; /* Mevcut ayın köşe yuvarlaklığı */
-  transition: all 0.2s ease-in-out; /* Smooth geçiş animasyonu */
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); /* Golden gradient for today */
+  border: 2px solid #f59e0b; /* Golden border */
+  box-shadow: 
+    0 0 0 3px rgba(245, 158, 11, 0.2),
+    0 4px 12px rgba(245, 158, 11, 0.3); /* Golden glow */
+  border-radius: 12px; /* More rounded */
+  font-weight: 700; /* Bold today */
+  color: #92400e; /* Darker golden text */
+  transition: all 0.2s ease-in-out;
 }
 
 .react-calendar__tile--hasActive {
@@ -111,17 +139,25 @@
 }
 
 .react-calendar__tile--active {
-    background: #006edc; /* Seçili tarih koyu mavi arka plan */
-    color: rgb(158, 153, 153); /* Seçili tarih yazı rengi gri */
-    border: 1px solid rgba(0, 0, 0, 1); /* Seçili tarih siyah kenarlık */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Seçili tarih gölge efekti */
-    border-radius: 6px; /* Seçili tarih köşe yuvarlaklığı */
-    transition: all 0.2s ease-in-out; /* Smooth geçiş animasyonu */
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); /* Purple gradient back */
+    color: white;
+    border: 2px solid #4f46e5;
+    box-shadow: 
+        0 0 0 2px rgba(99, 102, 241, 0.2), /* Smaller ring */
+        0 4px 12px rgba(99, 102, 241, 0.25); /* Softer glow */
+    border-radius: 12px;
+    font-weight: 700;
+    transform: scale(1.03); /* Less scale */
+    transition: all 0.2s ease-in-out;
 }
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-    background: #c7d2fe; /* Seçili tarih hover durumu - daha indigo-200 */
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); /* Darker purple hover */
+    transform: scale(1.05); /* Less scale */
+    box-shadow: 
+        0 0 0 3px rgba(99, 102, 241, 0.3), /* Subtle ring */
+        0 6px 20px rgba(99, 102, 241, 0.3); /* Softer glow */
 }
 
 /* Year view için özel renkler */

@@ -26,7 +26,6 @@ function Navbar() {
       <div className='flex gap-8'>
         <button className='nav-button' onClick={() => router.push('/dashboard')}>Home</button>
         <button className='nav-button' onClick={() => router.push('/statistics')}>Statistics</button>
-        <button className='nav-button' onClick={() => router.push('/profile')}>Profile</button>
         <button className='nav-button' onClick={handleLogout}><LogoutIcon fontSize="small" /></button>
       </div>
     </div>
