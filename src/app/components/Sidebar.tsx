@@ -1,11 +1,60 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Calendar from 'react-calendar'
 import '../calender.css'
 import Quotes from '../../../_components/Quotes'
+import { getMoods } from '../actions/mood'
+import { getMoodColor } from '../utils/statistics'
+import { getLocalDateString } from '../utils/date'
+import { getMoodList } from '../utils/mood'
 
-function Sidebar() {
+type SidebarProps = {
+  setIsToday: React.Dispatch<React.SetStateAction<boolean>>
+  setChangeDate: React.Dispatch<React.SetStateAction<boolean>>
+  changeDate: boolean
+  moodData: any[]
+}
+
+function Sidebar({setIsToday, setChangeDate, changeDate, moodData}: SidebarProps) {
+
+  // Belirli bir tarih için mood bilgisini bulma
+  const getMoodForDate = (date: Date) => {
+    const dateString = getLocalDateString(date)
+    return moodData.find(mood => mood.mood_date === dateString)
+  }
+
+  // Takvim tile'ı için mood emoji'si gösterme
+  const getTileContent = ({ date, view }: { date: Date, view: string }) => {
+    if (view !== 'month') return null
+    
+    const mood = getMoodForDate(date)
+    if (!mood) return null
+
+    const moodIcon = getMoodList().find(m => m.label.toLowerCase() === mood.mood.toLowerCase())
+
+    return (
+      <div className="mood-emoji flex justify-center items-center mt-1">
+        {moodIcon && (
+          <img 
+            src={moodIcon.icon} 
+            alt={mood.mood}
+            className="w-4 h-4 opacity-90 drop-shadow-sm"
+          />
+        )}
+      </div>
+    )
+  }
+
+  // Takvim tile'ı için arka plan rengi
+  const getTileClassName = ({ date, view }: { date: Date, view: string }) => {
+    if (view !== 'month') return null
+    
+    const mood = getMoodForDate(date)
+    if (!mood) return null
+
+    return `mood-tile mood-${mood.mood.toLowerCase()}`
+  }
 
   return (
     <div className="h-full flex flex-col p-6 relative">
@@ -25,6 +74,33 @@ function Sidebar() {
         <Calendar 
           className="custom-calendar"
           locale="en-US"
+          tileContent={getTileContent}
+          tileClassName={getTileClassName}
+          onChange={(date) => {
+            if (date instanceof Date) {
+               // Yerel tarih string'i oluştur
+               const localDateString = getLocalDateString(date);
+               localStorage.setItem("selectedDate", localDateString); 
+               
+               // Bugünün yerel tarihini al
+               const currentDate = new Date();
+               const currentDateOnly = getLocalDateString(currentDate);
+               
+               if(currentDateOnly !== localDateString){
+                 setIsToday(false);
+                 setChangeDate(!changeDate)
+                 console.log('Tarih farklı - isToday: false');
+                 console.log('currentDateOnly', currentDateOnly);
+                 console.log('selectedDateOnly', localDateString);
+               } else {
+                 setIsToday(true);
+                 setChangeDate(!changeDate)
+                 console.log('Tarih aynı - isToday: true');
+                 console.log('currentDateOnly', currentDateOnly);
+                 console.log('selectedDateOnly', localDateString);
+               }
+            }
+          }}
         />
       </div>
       

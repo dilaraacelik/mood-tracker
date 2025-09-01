@@ -1,7 +1,14 @@
 import React from 'react'
 import Moods from '../../../_components/Moods'
 
-function MainPage() {
+type MainPageProps = {
+  isToday: boolean
+  changeDate: boolean
+  moodData: any[]
+}
+
+function MainPage({isToday, changeDate, moodData}: MainPageProps) {
+  console.log('🔄 MainPage render edildi, isToday:', isToday);
   return ( 
     <div className="h-full flex flex-col relative overflow-hidden">
       {/* Modern background decorations */}
@@ -21,7 +28,7 @@ function MainPage() {
           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
         }}
-      ></div>
+      ></div> 
       
       {/* Main content */}
       <div className="h-full flex flex-col p-8 relative z-10">
@@ -36,7 +43,7 @@ function MainPage() {
         {/* Mood selection area */}
         <div className='flex-1 flex items-center justify-center'>
           <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-white/20 max-w-2xl w-full">
-            <Moods/>
+            <Moods isToday={isToday} changeDate={changeDate} moodData={moodData}/>
           </div>
         </div>
       </div>

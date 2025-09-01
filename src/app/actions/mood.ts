@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { createClient } from '../../../utils/supabase/server'
+import { getLocalDateString } from '../utils/date'
 
 export async function saveOrUpdateMood(mood: MoodData, moodDesc: string) {
     const supabase = await createClient();
@@ -11,7 +12,7 @@ export async function saveOrUpdateMood(mood: MoodData, moodDesc: string) {
         throw new Error('Kullanıcı bulunamadı ya da oturum açmamış')
     }
 
-    const currentDate = new Date().toISOString().split('T')[0]
+    const currentDate = getLocalDateString(new Date())
 
     const { error } = await supabase
         .from('moods')
@@ -40,7 +41,7 @@ export async function getMoods() {
         throw new Error('Kullanıcı bulunamadı ya da oturum açmamış');
     }
 
-    const {data: moodData, error} = await supabase.from('moods').select('mood, mood_img, mood_date').eq('user_id', user.id)
+    const {data: moodData, error} = await supabase.from('moods').select('mood, mood_img, mood_date,mood_desc').eq('user_id', user.id)
 
     if(error)
         return { status: 'error', message: error.message }
