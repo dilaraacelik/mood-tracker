@@ -13,7 +13,7 @@ type SidebarProps = {
   setIsToday: React.Dispatch<React.SetStateAction<boolean>>
   setChangeDate: React.Dispatch<React.SetStateAction<boolean>>
   changeDate: boolean
-  moodData: any[]
+  moodData: Array<{ mood: string; mood_img: string; mood_date: string; mood_desc: string }>
 }
 
 function Sidebar({setIsToday, setChangeDate, changeDate, moodData}: SidebarProps) {

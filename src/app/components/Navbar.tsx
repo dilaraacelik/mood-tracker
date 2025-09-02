@@ -19,7 +19,6 @@ function Navbar() {
     router.push('/login');
   }
 
-
   return (
     <div className='bg-white py-4 px-6 flex justify-between items-center shadow-sm border-b border-gray-200'> 
       <Title/>

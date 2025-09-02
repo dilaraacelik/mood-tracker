@@ -39,7 +39,6 @@ export default function LoginPage() {
                 <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 w-full max-w-md">
                 {/* Header Section */}
                 <div className="text-center mb-8">
-                    <div className="text-6xl mb-4">😊</div>
                     <h1 className="text-3xl font-bold text-gray-800 mb-2">
                     Welcome Back!
                     </h1>
@@ -107,7 +106,7 @@ export default function LoginPage() {
                     disabled={isLoading}
                     className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg disabled:opacity-50"
                     >
-                    {isLoading ? 'Signing In...' : 'Sign In 🚀'}
+                    {isLoading ? 'Signing In...' : 'Sign In'}
                     </button>
 
                     {/* Divider */}

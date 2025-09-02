@@ -1,3 +1,6 @@
+"use client"
+
+import { useQuery } from '@tanstack/react-query'
 import { getMoods } from "@/app/actions/mood"
 import { 
   countByMood, 
@@ -8,9 +11,42 @@ import {
 } from "@/app/utils/statistics"
 import MoodPieChart from "@/app/components/charts/MoodPieChart"
 
-export default async function StatisticsPage() {
-  const moodsResponse = await getMoods()
-  const moods = moodsResponse.data ?? []
+export default function StatisticsPage() {
+  const { data: moodsResponse, isLoading, error } = useQuery({
+    queryKey: ['moods'],
+    queryFn: getMoods
+  })
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-gray-600 text-lg">Loading your statistics...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Oops! Something went wrong</h2>
+          <p className="text-gray-600 mb-4">We couldn't load your statistics</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="px-6 py-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    )
+  }
+  const moods = moodsResponse?.data ?? []
   const counts = countByMood(moods) ?? {}
   const pieData = preparePieChartData(counts)
   
@@ -19,17 +55,37 @@ export default async function StatisticsPage() {
   const uniqueMoods = Object.keys(counts).length
   const recentMoods = getRecentMoods(moods, 7)
 
+
+  // Empty state
+  if (totalMoods === 0) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center max-w-md">
+          <div className="text-6xl mb-4">📊</div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">No Data Yet</h2>
+          <p className="text-gray-600 mb-6">Start tracking your moods to see beautiful statistics here!</p>
+          <button 
+            onClick={() => window.location.href = '/dashboard'}
+            className="px-6 py-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors"
+          >
+            Go to Dashboard
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-5">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Your Mood Statistics</h1>
           <p className="text-gray-600">Detailed analysis of your mood data</p>
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-5">
           <div className="relative bg-gradient-to-br from-purple-50 via-white to-indigo-50 rounded-2xl shadow-lg p-6 border border-purple-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-indigo-500/5 rounded-2xl"></div>
             <div className="relative flex items-center justify-between">
@@ -92,7 +148,7 @@ export default async function StatisticsPage() {
         </div>
 
         {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Pie Chart */}
           <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
             <div className="flex items-center justify-between mb-6">
@@ -117,7 +173,7 @@ export default async function StatisticsPage() {
                 </svg>
               </div>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-4 max-h-96 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400">
               {Object.entries(counts).map(([mood, count]) => {
                 const moodColor = getMoodColor(mood)
 
@@ -151,36 +207,7 @@ export default async function StatisticsPage() {
             </div>
           </div>
         </div>
-
-        {/* Additional Insights */}
-        <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Overall Status</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-              <div className="text-2xl mb-2">📊</div>
-              <h3 className="font-semibold text-gray-900">Tracking Period</h3>
-              <p className="text-sm text-gray-600 mt-1">
-                {totalMoods > 0 ? `You've been tracking your mood for ${totalMoods} days` : 'No records found yet'}
-              </p>
-            </div>
-            <div className="text-center p-4 bg-green-50 rounded-xl border border-green-100">
-              <div className="text-2xl mb-2">🎯</div>
-              <h3 className="font-semibold text-gray-900">Consistency</h3>
-              <p className="text-sm text-gray-600 mt-1">
-                {recentMoods.length > 5 ? 'Great! You\'re tracking regularly' : 'Try to be more consistent'}
-              </p>
-            </div>
-            <div className="text-center p-4 bg-purple-50 rounded-xl border border-purple-100">
-              <div className="text-2xl mb-2">💡</div>
-              <h3 className="font-semibold text-gray-900">Suggestions</h3>
-              <p className="text-sm text-gray-600 mt-1">
-                {uniqueMoods < 3 ? 'Your mood variety is limited' : 'You experience a wide range of emotions'}
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )
 }
-

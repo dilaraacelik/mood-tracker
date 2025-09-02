@@ -36,8 +36,13 @@ export async function signup(formData: FormData) {
     throw new Error("Şifreler aynı değil");
   }
 
-
-  const { error} = await supabase.auth.signUp({ email, password });
+  const { error} = await supabase.auth.signUp({ 
+    email, 
+    password,
+    options: {
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/confirm`
+    }
+  });
 
   if (error) {
     throw new Error(`Kayıt başarısız: ${error.message}`);
@@ -63,4 +68,3 @@ export async function logout(){
     revalidatePath("/", "layout");
     return { error: null };
 }
-/** CONFIRM EMAILYANLIŞ LİNKE GİDİYOR */

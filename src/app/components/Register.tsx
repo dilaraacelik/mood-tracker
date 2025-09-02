@@ -15,7 +15,6 @@ function RegisterPage() {
         <div className="flex justify-center items-center h-full">
             <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 w-full max-w-md">
             <div className="text-center mb-8">
-                <div className="text-6xl mb-4">😊</div>
                 <h1 className="text-3xl font-bold text-gray-800 mb-2">
                 Welcome!
                 </h1>
@@ -91,7 +90,7 @@ function RegisterPage() {
                 className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
                 formAction={signup}
                 >
-                Sign Up 🚀
+                Sign Up
                 </button>
 
                 {/* Divider */}

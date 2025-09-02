@@ -4,6 +4,7 @@ import { saveOrUpdateMood } from '@/app/actions/mood';
 import { getLocalDateString } from '@/app/utils/date';
 import { getMoodList } from '@/app/utils/mood';
 import { getMoodColor } from '@/app/utils/statistics';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react'
 
 import { toast } from 'react-toastify';
@@ -11,17 +12,14 @@ import { toast } from 'react-toastify';
 type MoodsProps = {
   isToday: boolean
   changeDate: boolean
-  moodData: any[]
+  moodData: Array<{ mood: string; mood_img: string; mood_date: string; mood_desc: string }>
 }
 
 function Moods({isToday, changeDate, moodData}: MoodsProps) {
-  console.log('🔄 Moods component render edildi, isToday:', isToday);
   const [clickedMood, setClickedMood] = useState<MoodData>({mood: null,icon: null});
   const [moodDesc, setMoodDesc] = useState<string>("")
-  const [isSaving, setIsSaving] = useState<boolean>(false)
 
   useEffect(() => {
-    console.log('today: ',isToday)
     if(isToday){
       const mood = localStorage.getItem('mood')
       const moodImg = localStorage.getItem('moodImg')
@@ -83,23 +81,30 @@ function Moods({isToday, changeDate, moodData}: MoodsProps) {
 
   }
 
-const handleSave = async () => {
-    localStorage.setItem('mood', clickedMood.mood ?? "");
-    localStorage.setItem('moodImg', clickedMood.icon ?? "")
-    localStorage.setItem('moodDesc', moodDesc ?? "")
-    setIsSaving(true)
-    const response = await saveOrUpdateMood(clickedMood, moodDesc)
+  const queryClient = useQueryClient()
 
-    if (response?.status === 'success') {
-        toast.success("Kayıt/Güncelleme başarılı!")
-        const currentDate = getLocalDateString(new Date())
-        localStorage.setItem('moodSavedDate', currentDate)
-        
-    } else {
-        toast.error(response?.message || "İşlem başarısız!")
+  const saveMoodMutation = useMutation({
+    mutationFn: ({ mood, desc }: { mood: MoodData, desc: string }) => 
+      saveOrUpdateMood(mood, desc),
+    onSuccess: () => {
+      toast.success("Kayıt/Güncelleme başarılı!")
+      const currentDate = getLocalDateString(new Date())
+      localStorage.setItem('moodSavedDate', currentDate)
+      // Cache'i güncelle
+      queryClient.invalidateQueries({ queryKey: ['moods'] })
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || "İşlem başarısız!")
     }
-    setIsSaving(false)
-}
+  })
+  
+  const handleSave = async () => {
+      localStorage.setItem('mood', clickedMood.mood ?? "");
+      localStorage.setItem('moodImg', clickedMood.icon ?? "")
+      localStorage.setItem('moodDesc', moodDesc ?? "")
+      
+      saveMoodMutation.mutate({ mood: clickedMood, desc: moodDesc })
+  }
 
   return (
     <div className='items-center flex flex-col space-y-8'>
@@ -167,16 +172,16 @@ const handleSave = async () => {
         
         {/* Save Button */}
         <div className='flex justify-end'>
-          <button 
+        <button 
             onClick={handleSave}
-            disabled={!clickedMood.mood || isSaving || !isToday}
+            disabled={!clickedMood.mood || saveMoodMutation.isPending || !isToday}
             className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 transform hover:scale-102 disabled:scale-100 disabled:cursor-not-allowed shadow-md
-              ${clickedMood.mood && !isSaving && isToday
+              ${clickedMood.mood && !saveMoodMutation.isPending && isToday
                 ? 'bg-gradient-to-r from-indigo-500 to-purple-500 hover:brightness-110 text-white shadow-purple-100' 
                 : 'bg-gray-200 text-gray-400 shadow-gray-100'
               }`}
           >
-            {isSaving ? (
+            {saveMoodMutation.isPending ? (
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 <span>Saving...</span>

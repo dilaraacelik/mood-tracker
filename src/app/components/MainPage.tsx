@@ -4,11 +4,10 @@ import Moods from '../../../_components/Moods'
 type MainPageProps = {
   isToday: boolean
   changeDate: boolean
-  moodData: any[]
+  moodData: Array<{ mood: string; mood_img: string; mood_date: string; mood_desc: string }>
 }
 
 function MainPage({isToday, changeDate, moodData}: MainPageProps) {
-  console.log('🔄 MainPage render edildi, isToday:', isToday);
   return ( 
     <div className="h-full flex flex-col relative overflow-hidden">
       {/* Modern background decorations */}
