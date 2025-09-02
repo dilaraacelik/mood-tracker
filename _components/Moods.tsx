@@ -20,29 +20,7 @@ function Moods({isToday, changeDate, moodData}: MoodsProps) {
   const [moodDesc, setMoodDesc] = useState<string>("")
 
   useEffect(() => {
-    if(isToday){
-      const mood = localStorage.getItem('mood')
-      const moodImg = localStorage.getItem('moodImg')
-      const moodDesc = localStorage.getItem('moodDesc')
-  
-      const moodSavedDate = localStorage.getItem('moodSavedDate')
-      const currentDate = getLocalDateString(new Date())
-  
-      if(moodSavedDate !== currentDate){
-        localStorage.setItem('mood',"")
-        localStorage.setItem('moodImg',"")
-        localStorage.setItem('moodDesc',"")
-      }
-      
-      setClickedMood({
-        mood: mood && mood !== "" ? mood : null,
-        icon: moodImg && moodImg !== "" ? moodImg : null
-      });
-  
-      setMoodDesc(moodDesc && moodDesc !== "" ? moodDesc : "")
-      
-    }
-    else{
+
       const selectedDate = localStorage.getItem('selectedDate');
       if (!selectedDate) return;
 
@@ -62,10 +40,8 @@ function Moods({isToday, changeDate, moodData}: MoodsProps) {
       setClickedMood({ mood: null, icon: null });
       setMoodDesc("");
     }
-      
 
-    }
-  },[changeDate])
+  },[changeDate,moodData])
 
   const handleMood = (mood: string, iconPath: string) => {
     const isSameMood = clickedMood.mood === mood
@@ -98,11 +74,7 @@ function Moods({isToday, changeDate, moodData}: MoodsProps) {
     }
   })
   
-  const handleSave = async () => {
-      localStorage.setItem('mood', clickedMood.mood ?? "");
-      localStorage.setItem('moodImg', clickedMood.icon ?? "")
-      localStorage.setItem('moodDesc', moodDesc ?? "")
-      
+  const handleSave = async () => {      
       saveMoodMutation.mutate({ mood: clickedMood, desc: moodDesc })
   }
 

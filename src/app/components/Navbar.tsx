@@ -5,18 +5,33 @@ import Title from './Title'
 import LogoutIcon from '@mui/icons-material/Logout';
 import { logout } from '@/app/actions/auth'
 import { useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 
 function Navbar() {
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const handleLogout = async () => {
-    const response = await logout();
-
-    if(response.error){
-      console.error(response.error);
-      return;
+    try {
+      // 1. localStorage'ı temizle
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('selectedDate');
+      
+      // 2. React Query cache'ini temizle
+      queryClient.clear();
+      
+      // 3. Supabase logout
+      await logout();
+      
+      router.push('/login'); 
+      
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Hata olsa bile temizlik yap ve yönlendir
+      localStorage.clear();
+      queryClient.clear();
+      router.push('/login');
     }
-    router.push('/login');
   }
 
   return (

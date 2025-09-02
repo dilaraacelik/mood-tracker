@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { createClient } from '../../../utils/supabase/server' /** burayı düzenle bacım */
+import { toast } from 'react-toastify'
 
 export async function login(formData: FormData) {
 
@@ -47,9 +48,9 @@ export async function signup(formData: FormData) {
   if (error) {
     throw new Error(`Kayıt başarısız: ${error.message}`);
   }
-  
-    revalidatePath('', 'layout')
-    redirect('/login')
+  toast.success("Kayıt başarılı!")
+  revalidatePath('', 'layout')
+  redirect('/login')
 
 }
 
