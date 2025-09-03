@@ -65,14 +65,14 @@ function Moods({isToday, changeDate, moodData}: MoodsProps) {
     mutationFn: ({ mood, desc }: { mood: MoodData, desc: string }) => 
       saveOrUpdateMood(mood, desc),
     onSuccess: () => {
-      toast.success("Kayıt/Güncelleme başarılı!")
+      toast.success("Save/Update successful!")
       const currentDate = getLocalDateString(new Date())
       localStorage.setItem('moodSavedDate', currentDate)
       // Cache'i güncelle
       queryClient.invalidateQueries({ queryKey: ['moods'] })
     },
     onError: (error: any) => {
-      toast.error(error?.message || "İşlem başarısız!")
+      toast.error(error?.message || "Operation failed!")
     }
   })
   
