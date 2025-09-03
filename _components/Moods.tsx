@@ -4,6 +4,7 @@ import { saveOrUpdateMood } from '@/app/actions/mood';
 import { getLocalDateString } from '@/app/utils/date';
 import { getMoodList } from '@/app/utils/mood';
 import { getMoodColor } from '@/app/utils/statistics';
+import { MoodData } from '@/app/types/MoodData';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react'
 
