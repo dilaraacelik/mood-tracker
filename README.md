@@ -81,4 +81,4 @@ Proje [Vercel](https://vercel.com) üzerinde deploy edilmiştir.
 
 ---
 
-Bu proje modern web development teknolojilerini öğrenmek için ideal bir örnektir.
+Bu proje modern web development teknolojilerini öğrenmek için yapılmıştır.
