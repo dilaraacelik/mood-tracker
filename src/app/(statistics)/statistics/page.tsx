@@ -4,7 +4,7 @@ import React from 'react'
 
 function Statistics() {
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className="h-screen flex flex-col overflow-auto">
         <Navbar/>
         <div className="flex-1 bg-gray-50">
             <StatisticsPage/>

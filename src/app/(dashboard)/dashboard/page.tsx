@@ -23,7 +23,7 @@ export default function Home() {
   },[])
  
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-gradient-to-br from-slate-50 to-gray-100">
+    <div className="h-screen flex flex-col overflow-auto bg-gradient-to-br from-slate-50 to-gray-100">
       <Navbar/> 
       <div className="flex flex-1 h-full">
         <div className="w-1/3 bg-white/80 backdrop-blur-sm border-r border-gray-200 shadow-lg">

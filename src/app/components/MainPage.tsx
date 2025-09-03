@@ -19,7 +19,7 @@ function MainPage({isToday, changeDate, moodData}: MainPageProps) {
 
       {/* Character image - repositioned to left side with fade effect */}
       <div 
-        className="absolute top-20 left-8 w-64 h-64 bg-contain bg-no-repeat z-20 opacity-70 hidden lg:block" 
+        className="absolute top-5 left-8 w-64 h-64 bg-contain bg-no-repeat z-20 opacity-70 hidden lg:block" 
         style={{
           backgroundImage: "url('/JoeyTribbiani.png')",
           backgroundPosition: 'center top',
@@ -40,8 +40,8 @@ function MainPage({isToday, changeDate, moodData}: MainPageProps) {
         </div>
         
         {/* Mood selection area */}
-        <div className='flex-1 flex items-center justify-center'>
-          <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-white/20 max-w-2xl w-full">
+        <div className='flex-1 flex items-start justify-center'>
+          <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-xl p-5 border border-white/20 max-w-2xl w-full">
             <Moods isToday={isToday} changeDate={changeDate} moodData={moodData}/>
           </div>
         </div>
