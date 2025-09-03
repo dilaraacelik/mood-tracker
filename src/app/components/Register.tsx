@@ -1,9 +1,27 @@
+"use client"
+
 import React from 'react'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Title from '@/app/components/Title';
 import { signup } from '@/app/actions/auth';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation'
 
 function RegisterPage() {
+  const router = useRouter()
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const response = await signup(formData)
+    if(response?.success){
+      toast.success('Register successful, Please check your email for confirmation')
+      router.push('/login')
+    } else {
+      toast.error('Register failed')
+      console.error('Register failed:', response?.error)
+    }
+  }
   return (
     <div className="h-screen relative overflow-hidden">
       {/* SAYFANIN SOL ÜST KÖŞESİNE HİZALI TITLE */}
@@ -23,7 +41,7 @@ function RegisterPage() {
                 </p>
             </div>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
                 {/* Email Input */}
                 <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor='email'>
@@ -88,7 +106,6 @@ function RegisterPage() {
                 <button
                 type="submit"
                 className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
-                formAction={signup}
                 >
                 Sign Up
                 </button>

@@ -4,6 +4,7 @@ import { login } from '@/app/actions/auth'
 import Title from '@/app/components/Title'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 export default function LoginPage() {
     const router = useRouter()
@@ -19,8 +20,10 @@ export default function LoginPage() {
         
         if(response?.access_token){
             localStorage.setItem('accessToken', response.access_token)
+            toast.success('Login successful')
             router.push('/dashboard')
         } else {
+            toast.error('Login failed')
             console.error('Login failed:', response?.error)
         }
         

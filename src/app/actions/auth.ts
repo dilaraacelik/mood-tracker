@@ -46,11 +46,11 @@ export async function signup(formData: FormData) {
   });
 
   if (error) {
-    throw new Error(`Kayıt başarısız: ${error.message}`);
+    return { error: error.message, success: false }
   }
-  toast.success("Kayıt başarılı!")
+
   revalidatePath('', 'layout')
-  redirect('/login')
+  return { success: true }
 
 }
 
