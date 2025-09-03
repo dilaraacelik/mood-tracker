@@ -26,7 +26,7 @@ function Quotes() {
     
     const fetchQuotes = async () => {
       try {
-          const response = await axios.get<Quote>("http://api.quotable.io/random",{
+          const response = await axios.get<Quote>("https://api.quotable.io/random",{
             headers: {
               Accept: "application/json"
             }
@@ -34,41 +34,71 @@ function Quotes() {
           console.log('Veri: ', response.data.content)
           setQuotes(response.data)
 
-          localStorage.setItem('quoteDate', getCurrentDate())
-          localStorage.setItem('quote', JSON.stringify(response.data))
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('quoteDate', getCurrentDate())
+            localStorage.setItem('quote', JSON.stringify(response.data))
+          }
 
       } catch(err) {
-          console.error(err)
+          console.error('Quote fetch error:', err)
+          // Fallback quote
+          const fallbackQuote: Quote = {
+            content: "The only way to do great work is to love what you do.",
+            author: "Steve Jobs",
+            tags: ["motivational"],
+            id: 1
+          }
+          setQuotes(fallbackQuote)
       }
     }
 
     useEffect(() => {
+      // Client-side check
+      if (typeof window === 'undefined') return;
       
       let quoteDate = localStorage.getItem('quoteDate')
       let dailyQuote = localStorage.getItem('quote')
       
       if(quoteDate === getCurrentDate() && dailyQuote){
         console.log('kayıt edilen quote')
-        setQuotes(JSON.parse(dailyQuote))
+        try {
+          setQuotes(JSON.parse(dailyQuote))
+        } catch (error) {
+          console.error('Quote parse error:', error)
+          fetchQuotes()
+        }
       }
       else{
         console.log('yeni quote')
         fetchQuotes()
       }
+      
       const interval = setInterval(() =>{
+        if (typeof window === 'undefined') return;
         const currentQuoteDate = localStorage.getItem('quoteDate');
-        if(currentQuoteDate != getCurrentDate())
+        if(currentQuoteDate !== getCurrentDate())
           fetchQuotes()
       }, 60 * 1000)
 
       return () => clearInterval(interval);
-    }
-    , [])
+    }, [])
 
   return (
     <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-md max-w-lg mx-auto">
-      <p className='text-gray-800 text-lg italic leading-relaxed mb-4 text-center'>"{quote?.content}"</p>
-      <p className='text-gray-600 text-sm font-medium text-right'>— {quote?.author}</p>
+      {quote ? (
+        <>
+          <p className='text-gray-800 text-lg italic leading-relaxed mb-4 text-center'>"{quote.content}"</p>
+          <p className='text-gray-600 text-sm font-medium text-right'>— {quote.author}</p>
+        </>
+      ) : (
+        <div className="text-center">
+          <div className="animate-pulse">
+            <div className="h-4 bg-gray-300 rounded mb-2"></div>
+            <div className="h-4 bg-gray-300 rounded mb-4"></div>
+            <div className="h-3 bg-gray-200 rounded w-1/2 ml-auto"></div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
