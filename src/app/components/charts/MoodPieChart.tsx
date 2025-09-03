@@ -5,7 +5,7 @@ import { getMoodColor } from "@/app/utils/statistics"
 export default function MoodPieChart({ data }: { data: {name: string, value: number}[] }) {
   const colors = data.map(item => getMoodColor(item.name))
 
-  const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: any[] }) => {
+  const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: Array<{ name: string; value: number; payload: { total: number } }> }) => {
     if (active && payload && payload.length) {
       const data = payload[0]
       return (
@@ -20,10 +20,10 @@ export default function MoodPieChart({ data }: { data: {name: string, value: num
     return null
   }
 
-  const CustomLegend = ({ payload }: { payload?: any[] }) => {
+  const CustomLegend = ({ payload }: { payload?: Array<{ value: string; color: string }> }) => {
     return (
       <div className="flex flex-wrap justify-center gap-4 mt-4">
-        {payload?.map((entry: any, index: number) => (
+        {payload?.map((entry, index: number) => (
           <div key={index} className="flex items-center space-x-2">
             <div 
               className="w-3 h-3 rounded-full" 
