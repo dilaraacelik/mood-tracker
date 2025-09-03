@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '../../../../utils/supabase/client'
 import Title from '@/app/components/Title'
 
-export default function ConfirmPage() {
+function ConfirmPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   
@@ -67,5 +67,33 @@ export default function ConfirmPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function ConfirmPage() {
+  return (
+    <Suspense fallback={
+      <div className="h-screen relative overflow-hidden">
+        <div className="fixed top-4 left-4 z-50">
+          <Title />
+        </div>
+        <div className="flex justify-center items-center h-full">
+          <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 w-full max-w-md text-center">
+            <div className="mb-6">
+              <div className="text-indigo-500 text-6xl mb-4">📧</div>
+              <h1 className="text-2xl font-bold text-gray-800 mb-2">
+                Loading...
+              </h1>
+              <p className="text-gray-600 text-sm mb-6">
+                Please wait while we load the confirmation page...
+              </p>
+            </div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500 mx-auto"></div>
+          </div>
+        </div>
+      </div>
+    }>
+      <ConfirmPageContent />
+    </Suspense>
   )
 }
