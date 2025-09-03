@@ -7,6 +7,7 @@ import { getMoodColor } from '@/app/utils/statistics';
 import { MoodData } from '@/app/types/MoodData';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 import { toast } from 'react-toastify';
 
@@ -103,10 +104,12 @@ function Moods({isToday, changeDate, moodData}: MoodsProps) {
                     border: `2px solid ${isSelected ? moodColor : '#e2e8f0'}`,
                   }}
                 >
-                  <img 
+                  <Image 
                     src={m.icon} 
                     alt={`${m.label} Icon`} 
-                    className="w-8 h-8 transition-all duration-300"
+                    width={32}
+                    height={32}
+                    className="transition-all duration-300"
                   />
                   {isSelected && (
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center">
