@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { createClient } from '../../../utils/supabase/server'
 import { getLocalDateString } from '../utils/date'
+import { MoodData } from '../types/MoodData'
 
 export async function saveOrUpdateMood(mood: MoodData, moodDesc: string) {
     const supabase = await createClient();

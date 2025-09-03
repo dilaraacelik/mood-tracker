@@ -1,5 +1,5 @@
 
-export function countByMood(moods: any[]){
+export function countByMood(moods: { mood: string }[]){
     const counts: Record<string, number> = {}
     moods.forEach(m => {
         counts[m.mood] = (counts[m.mood] || 0) + 1
@@ -31,7 +31,7 @@ export function getMostFrequentMood(counts: Record<string, number>): [string, nu
 }
 
 // Belirli tarih aralığındaki ruh hallerini filtreleme
-export function getRecentMoods(moods: any[], days: number = 7): any[] {
+export function getRecentMoods(moods: { mood_date: string }[], days: number = 7): { mood_date: string }[] {
     const targetDate = new Date()
     targetDate.setDate(targetDate.getDate() - days)
     

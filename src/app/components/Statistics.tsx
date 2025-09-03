@@ -35,7 +35,7 @@ export default function StatisticsPage() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Oops! Something went wrong</h2>
-          <p className="text-gray-600 mb-4">We couldn't load your statistics</p>
+          <p className="text-gray-600 mb-4">We couldn&apos;t load your statistics</p>
           <button 
             onClick={() => window.location.reload()}
             className="px-6 py-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors"
