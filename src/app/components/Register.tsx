@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Title from '@/app/components/Title';
 import { signup } from '@/app/actions/auth';
