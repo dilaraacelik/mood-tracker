@@ -1,11 +1,10 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import Image from 'next/image'
 import Calendar from 'react-calendar'
 import '../calender.css'
 import Quotes from '../../../_components/Quotes'
-import { getMoods } from '../actions/mood'
-import { getMoodColor } from '../utils/statistics'
 import { getLocalDateString } from '../utils/date'
 import { getMoodList } from '../utils/mood'
 
@@ -36,10 +35,12 @@ function Sidebar({setIsToday, setChangeDate, changeDate, moodData}: SidebarProps
     return (
       <div className="mood-emoji flex justify-center items-center mt-1">
         {moodIcon && (
-          <img 
+          <Image 
             src={moodIcon.icon} 
             alt={mood.mood}
-            className="w-4 h-4 opacity-90 drop-shadow-sm"
+            width={16}
+            height={16}
+            className="opacity-90 drop-shadow-sm"
           />
         )}
       </div>

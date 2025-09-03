@@ -19,7 +19,7 @@ export default function ConfirmPage() {
         
         try {
           const { error } = await supabase.auth.verifyOtp({
-            type: type as any,
+            type: type as 'signup' | 'email_change',
             token_hash,
           })
           

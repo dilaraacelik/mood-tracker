@@ -34,7 +34,7 @@ function MainPage({isToday, changeDate, moodData}: MainPageProps) {
         {/* Header */}
         <div className='text-center mb-12'>
           <h1 className='text-4xl font-bold text-black mb-2'>
-            How You Doin'?
+            How You Doin&apos;?
           </h1>
           <p className='text-gray-600 text-lg'>Track your mood and thoughts for today</p>
         </div>
